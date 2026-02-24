@@ -1,1 +1,272 @@
-<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Form Submission</title>\n    <script>\n        function validateForm() {\n            const name = document.forms["myForm"]["name"].value;\n            const email = document.forms["myForm"]["email"].value;\n            const message = document.forms["myForm"]["message"].value;\n            if (name == "" || email == "" || message == "") {\n                alert("All fields must be filled out.");\n                return false;\n            }\n            return true;\n        }\n\n        function submitForm(event) {\n            event.preventDefault();\n            const loadingIndicator = document.getElementById('loading');\n            loadingIndicator.style.display = 'block';\n            if (!validateForm()) {\n                loadingIndicator.style.display = 'none';\n                return;\n            }\n            // Simulate form processing (e.g., sending to server)\n            setTimeout(() => {\n                loadingIndicator.style.display = 'none';\n                alert('Form submitted successfully!');\n                document.forms["myForm"].reset();\n            }, 2000);\n        }\n    <\/script>\n    <style>\n        #loading { display: none; }\n    <\/style>\n</head>\n<body>\n    <h1>Contact Us</h1>\n    <form name="myForm" onsubmit="submitForm(event)">\n        <label for="name">Name:</label>\n        <input type="text" id="name" name="name"><br><br>\n        <label for="email">Email:</label>\n        <input type="email" id="email" name="email"><br><br>\n        <label for="message">Message:</label><br>\n        <textarea id="message" name="message"></textarea><br><br>\n        <input type="submit" value="Submit">\n    </form>\n    <div id='loading'>Loading...</div>\n</body>\n</html>\n
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Vaga - Grupo Esc Soluções</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .form-container {
+            padding: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        @media (max-width: 600px) {
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .result {
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .result.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .result.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🚀 Publicar Nova Vaga</h1>
+        <p>Preencha e publique automaticamente no blog</p>
+    </div>
+    
+    <div class="form-container">
+        <form action="https://formsubmit.co/grupoesc.solucoes.kdbdia01@blogger.com" method="POST" id="vagaForm">
+            
+            <input type="hidden" name="_subject" value="Nova Vaga Publicada">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            
+            <div class="form-group">
+                <label>Título da Vaga <span class="required">*</span></label>
+                <input type="text" name="titulo" required placeholder="Ex: Desenvolvedor Front-end">
+            </div>
+
+            <div class="form-group">
+                <label>Nome da Empresa <span class="required">*</span></label>
+                <input type="text" name="empresa" required placeholder="Ex: Tech Solutions">
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Local</label>
+                    <input type="text" name="local" placeholder="Ex: São Paulo, SP">
+                </div>
+                <div class="form-group">
+                    <label>Modelo de Trabalho</label>
+                    <select name="modelo">
+                        <option value="">Selecione...</option>
+                        <option value="Presencial">Presencial</option>
+                        <option value="Remoto">Remoto</option>
+                        <option value="Híbrido">Híbrido</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Área de Atuação</label>
+                    <select name="area">
+                        <option value="">Selecione...</option>
+                        <option value="Tecnologia">Tecnologia</option>
+                        <option value="Administração">Administração</option>
+                        <option value="Vendas">Vendas</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="RH">RH</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Escolaridade</label>
+                    <select name="escolaridade">
+                        <option value="">Selecione...</option>
+                        <option value="Ensino Médio">Ensino Médio</option>
+                        <option value="Técnico">Técnico</option>
+                        <option value="Superior Incompleto">Superior Incompleto</option>
+                        <option value="Superior Completo">Superior Completo</option>
+                        <option value="Pós-graduação">Pós-graduação</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Salário</label>
+                    <input type="text" name="salario" placeholder="Ex: R$ 5.000,00">
+                </div>
+                <div class="form-group">
+                    <label>Tipo de Contrato</label>
+                    <select name="contrato">
+                        <option value="">Selecione...</option>
+                        <option value="CLT">CLT</option>
+                        <option value="PJ">PJ</option>
+                        <option value="Estágio">Estágio</option>
+                        <option value="Freelancer">Freelancer</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Nível de Experiência</label>
+                <select name="nivel">
+                    <option value="">Selecione...</option>
+                    <option value="Júnior">Júnior</option>
+                    <option value="Pleno">Pleno</option>
+                    <option value="Sênior">Sênior</option>
+                    <option value="Especialista">Especialista</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Descrição da Vaga <span class="required">*</span></label>
+                <textarea name="descricao" required placeholder="Descreva as atividades da vaga..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Requisitos</label>
+                <textarea name="requisitos" placeholder="Liste os requisitos necessários..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Benefícios</label>
+                <textarea name="beneficios" placeholder="Liste os benefícios oferecidos..."></textarea>
+            </div>
+
+            <hr style="margin: 25px 0; border: none; border-top: 1px solid #eee;">
+
+            <h3 style="color: #667eea; margin-bottom: 20px;">📧 Informações para Candidatura</h3>
+
+            <div class="form-group">
+                <label>Email para Receber Currículos</label>
+                <input type="email" name="email_contato" placeholder="rh@empresa.com.br">
+            </div>
+
+            <div class="form-group">
+                <label>Link de Candidatura</label>
+                <input type="text" name="link_candidatura" placeholder="https://...">
+            </div>
+
+            <div class="form-group">
+                <label>Instruções Adicionais</label>
+                <textarea name="instrucoes" placeholder="Observações importantes..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">🚀 Publicar Vaga no Blog</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
